@@ -43,6 +43,11 @@ public class MainOficial extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         tblOficiales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -161,6 +166,12 @@ public class MainOficial extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+        cargarTabla();
+        
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * Sirve para imprimir la tabla de la base de datos a la tabla que vera el usuiario

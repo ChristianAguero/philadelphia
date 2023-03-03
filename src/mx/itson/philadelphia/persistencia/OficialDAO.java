@@ -5,7 +5,6 @@
 package mx.itson.philadelphia.persistencia;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.swing.JOptionPane;
@@ -39,7 +38,7 @@ public class OficialDAO {
                     
         }catch(Exception ex){
             
-            System.err.println("Ocurrio un error" + ex);
+            System.err.println("Ocurrio un error: " + ex);
             
         }
         

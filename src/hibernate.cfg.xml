@@ -39,6 +39,8 @@
         
         <mapping class = "mx.itson.philadelphia.entities.Conductor"/>
         
+        <mapping class = "mx.itson.philadelphia.entities.Oficial"/>
+        
     </session-factory>
 
 </hibernate-configuration>
