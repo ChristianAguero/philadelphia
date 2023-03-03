@@ -41,6 +41,8 @@
         
         <mapping class = "mx.itson.philadelphia.entities.Oficial"/>
         
+        <mapping class = "mx.itson.philadelphia.entities.Multa"/>
+        
     </session-factory>
 
 </hibernate-configuration>
