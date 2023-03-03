@@ -4,15 +4,20 @@
  */
 package mx.itson.philadelphia.ui;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import mx.itson.philadelphia.entities.Conductor;
+import mx.itson.philadelphia.persistencia.ConductorDAO;
 
 /**
  *
  * @author Christian
  */
 public class Guardar extends javax.swing.JDialog {
+    
+    int idConductor;
 
     /**
      * Creates new form Guardar
@@ -20,6 +25,23 @@ public class Guardar extends javax.swing.JDialog {
     public Guardar(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
+        
+        this.idConductor = id;
+        
+        DateFormat formato = new SimpleDateFormat("dd/MMMM/yyyy");
+        
+        if(idConductor != 0){
+            
+            ConductorDAO con = new ConductorDAO();
+            Conductor conductor = con.obtenerPorId(this.idConductor);
+            
+            txtNombre.setText(conductor.getNombre());
+            txtNumeroLicencia.setText(conductor.getNumeroLicencia());
+            Date fecha = conductor.getFechaAlta();
+            String alta = formato.format(fecha);
+            String a[] = alta.split("/");
+            
+        }
         
         cboDias.removeAllItems();
         cboAnios.removeAllItems();
@@ -148,9 +170,9 @@ public class Guardar extends javax.swing.JDialog {
             String fecha = cboDias.getSelectedItem().toString() + "/" + cboMeses.getSelectedItem().toString() + "/" + cboAnios.getSelectedItem().toString();
             Date fechaAlta = formato.parse(fecha);
 
-            boolean funco = this.idDivisa == 0 ?
-                    new Divisa().guardar(nombre, abreviacion, simbolo):
-                    new Divisa().editar(idDivisa, nombre, abreviacion, simbolo);
+            boolean funco = this.idConductor == 0 ?
+                    new ConductorDAO().guardar(nombre, numeroLicencia, fechaAlta):
+                    new ConductorDAO().editar(idConductor, nombre, numeroLicencia, fechaAlta);
 
             if(funco){
 
@@ -195,6 +217,7 @@ public class Guardar extends javax.swing.JDialog {
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
+                     dia++;
                      
                  }
                  
@@ -204,6 +227,7 @@ public class Guardar extends javax.swing.JDialog {
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
+                     dia++;
                      
                  }
                  
@@ -213,6 +237,7 @@ public class Guardar extends javax.swing.JDialog {
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
+                     dia++;
                      
                  }
                  
@@ -222,6 +247,7 @@ public class Guardar extends javax.swing.JDialog {
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
+                     dia++;
                      
                  }
                  
@@ -231,6 +257,7 @@ public class Guardar extends javax.swing.JDialog {
                      
                     cboDias.addItem(Integer.toString(dia));
                      i++;
+                     dia++;
                      
                  }
                  
@@ -240,6 +267,7 @@ public class Guardar extends javax.swing.JDialog {
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
+                     dia++;
                      
                  }
                  
@@ -249,6 +277,7 @@ public class Guardar extends javax.swing.JDialog {
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
+                     dia++;
                      
                  }
                  
@@ -258,6 +287,7 @@ public class Guardar extends javax.swing.JDialog {
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
+                     dia++;
                      
                  }
                  
@@ -267,6 +297,7 @@ public class Guardar extends javax.swing.JDialog {
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
+                     dia++;
                      
                  }
                  
@@ -276,6 +307,7 @@ public class Guardar extends javax.swing.JDialog {
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
+                     dia++;
                      
                  }
                  
@@ -285,6 +317,7 @@ public class Guardar extends javax.swing.JDialog {
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
+                     dia++;
                      
                  }
                  
@@ -294,6 +327,7 @@ public class Guardar extends javax.swing.JDialog {
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
+                     dia++;
                      
                  }
                  

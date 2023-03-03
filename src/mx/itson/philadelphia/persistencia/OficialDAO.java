@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.swing.JOptionPane;
-import mx.itson.philadelphia.entities.*;
+import mx.itson.philadelphia.entities.Oficial;
 import mx.itson.philadelphia.utilerias.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -18,24 +18,24 @@ import org.hibernate.Session;
  *
  * @author Christian
  */
-public class ConductorDAO {
+public class OficialDAO {
     
     /**
      * 
      * @return 
      */
-    public List<Conductor> ObtenerTodos(){
+    public List<Oficial> ObtenerTodos(){
     
-        List<Conductor> conductores = new ArrayList<>();
+        List<Oficial> oficiales = new ArrayList<>();
 
         try{
             
             Session session = HibernateUtil.getSessionFactory().openSession();
             
-            CriteriaQuery<Conductor> criteriaQuery = session.getCriteriaBuilder().createQuery(Conductor.class);
-            criteriaQuery.from(Conductor.class);
+            CriteriaQuery<Oficial> criteriaQuery = session.getCriteriaBuilder().createQuery(Oficial.class);
+            criteriaQuery.from(Oficial.class);
             
-            conductores = session.createQuery(criteriaQuery).getResultList();
+            oficiales = session.createQuery(criteriaQuery).getResultList();
                     
         }catch(Exception ex){
             
@@ -43,11 +43,11 @@ public class ConductorDAO {
             
         }
         
-        return conductores;
+        return oficiales;
     
     }
     
-    public boolean guardar(String nombre, String numeroLicencia, Date fechaAlta){
+    public boolean guardar(String nombre, String telefono){
         
         boolean resultado = false;
         
@@ -56,16 +56,15 @@ public class ConductorDAO {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             
-            Conductor c = new Conductor();
-            c.setNombre(nombre);
-            c.setNumeroLicencia(numeroLicencia);
-            c.setFechaAlta(fechaAlta);
+            Oficial o = new Oficial();
+            o.setNombre(nombre);
+            o.setTelefono(telefono);
             
-            session.save(c);
+            session.save(o);
             
             session.getTransaction().commit();
             
-            resultado = c.getId() != 0;
+            resultado = o.getId() != 0;
             
         }catch(Exception ex){
             
@@ -77,14 +76,14 @@ public class ConductorDAO {
         
     }
     
-    public Conductor obtenerPorId(int id){
+    public Oficial obtenerPorId(int id){
         
-        Conductor conductor = new Conductor();
+        Oficial conductor = new Oficial();
         
         try{
             
             Session session = HibernateUtil.getSessionFactory().openSession();
-            conductor = session.get(Conductor.class,  id);
+            conductor = session.get(Oficial.class,  id);
             
         }catch(HibernateException ex){
             
@@ -96,7 +95,7 @@ public class ConductorDAO {
         
     }
     
-    public boolean editar(int id, String nombre, String numeroLicencia, Date fechaAlta){
+    public boolean editar(int id, String nombre, String telefono){
         
         boolean resultado = false;
         
@@ -105,15 +104,14 @@ public class ConductorDAO {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             
-            Conductor conductor = obtenerPorId(id);
+            Oficial oficial = obtenerPorId(id);
             
-            if(conductor != null){
+            if(oficial != null){
                 
-                conductor.setNombre(nombre);
-                conductor.setFechaAlta(fechaAlta);
-                conductor.setNumeroLicencia(numeroLicencia);
+                oficial.setNombre(nombre);
+                oficial.setTelefono(telefono);
                 
-                session.saveOrUpdate(conductor);
+                session.saveOrUpdate(oficial);
                 session.getTransaction().commit();
                 
                 resultado = true;
@@ -144,11 +142,11 @@ public class ConductorDAO {
                Session session = HibernateUtil.getSessionFactory().openSession();
                session.beginTransaction();
 
-               Conductor conductor = obtenerPorId(id);
+               Oficial oficial = obtenerPorId(id);
 
-               if(conductor != null){
+               if(oficial != null){
 
-                   session.delete(conductor);
+                   session.delete(oficial);
                    session.getTransaction().commit();
 
                    resultado = true;

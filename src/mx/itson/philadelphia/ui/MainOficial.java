@@ -6,22 +6,23 @@ package mx.itson.philadelphia.ui;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import mx.itson.philadelphia.entities.Conductor;
-import mx.itson.philadelphia.persistencia.ConductorDAO;
+import mx.itson.philadelphia.entities.Oficial;
+import mx.itson.philadelphia.persistencia.OficialDAO;
 
 /**
  *
  * @author Christian
  */
-public class MainFrame extends javax.swing.JFrame {
+public class MainOficial extends javax.swing.JFrame {
 
     /**
-     * Creates new form MainFrame
+     * Creates new form MainOficial
      */
-    public MainFrame() {
+    public MainOficial() {
         initComponents();
         
-        tblConductores.removeColumn(tblConductores.getColumnModel().getColumn(0));
+        tblOficiales.removeColumn(tblOficiales.getColumnModel().getColumn(0));
+        
     }
 
     /**
@@ -34,7 +35,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblConductores = new javax.swing.JTable();
+        tblOficiales = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btnAgregar = new javax.swing.JMenuItem();
@@ -42,24 +43,27 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
-        tblConductores.setModel(new javax.swing.table.DefaultTableModel(
+        tblOficiales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "id", "Nombre", "Numero de licencia", "Fecha de alta"
+                "id", "Nombre", "Telefono"
             }
-        ));
-        jScrollPane1.setViewportView(tblConductores);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblOficiales);
 
         jMenu1.setText("Opciones");
 
@@ -95,77 +99,69 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 933, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+
+        GuardarOficial formulario = new GuardarOficial(this, true, 0);
+        formulario.setVisible(true);
 
         cargarTabla();
-        
-    }//GEN-LAST:event_formWindowOpened
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        
-        Guardar formulario = new Guardar(this, true, 0);
-       formulario.setVisible(true);
-       
-       cargarTabla();
-        
-        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
-         try{
-        
-            int renglon = tblConductores.getSelectedRow();
-           int idConductor = Integer.parseInt( tblConductores.getModel().getValueAt(renglon, 0).toString());
 
-            new Guardar(this, true, idConductor).setVisible(true);
+        try{
+
+            int renglon = tblOficiales.getSelectedRow();
+            int idConductor = Integer.parseInt( tblOficiales.getModel().getValueAt(renglon, 0).toString());
+
+            new GuardarOficial(this, true, idConductor).setVisible(true);
 
             cargarTabla();
-        
+
         }catch(Exception ex){
-            
+
             System.err.println("Ocurrio un error: " + ex.getMessage());
-            
+
         }
-        
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        
-         try{
-        
-            int renglon = tblConductores.getSelectedRow();
-           int idPais = Integer.parseInt( tblConductores.getModel().getValueAt(renglon, 0).toString());
 
-           new ConductorDAO().eliminar(idPais);
+        try{
 
-           cargarTabla();
-       
-       }catch(Exception ex){
-            
+            int renglon = tblOficiales.getSelectedRow();
+            int idPais = Integer.parseInt( tblOficiales.getModel().getValueAt(renglon, 0).toString());
+
+            new OficialDAO().eliminar(idPais);
+
+            cargarTabla();
+
+        }catch(Exception ex){
+
             System.err.println("Ocurrio un error: " + ex.getMessage());
-            
+
         }
-        
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    
     /**
      * Sirve para imprimir la tabla de la base de datos a la tabla que vera el usuiario
      */
@@ -173,15 +169,15 @@ public class MainFrame extends javax.swing.JFrame {
         
         try{
             
-            DefaultTableModel modelo = (DefaultTableModel) tblConductores.getModel();
+            DefaultTableModel modelo = (DefaultTableModel) tblOficiales.getModel();
             modelo.setRowCount(0);
-            ConductorDAO con = new ConductorDAO();
+            OficialDAO of = new OficialDAO();
 
-            List<Conductor> cond = con.ObtenerTodos();
+            List<Oficial> ofi = of.ObtenerTodos();
             
-            for(Conductor d : cond){
+            for(Oficial o : ofi){
 
-                modelo.addRow(new Object[] {d.getId(), d.getNombre(), d.getNumeroLicencia(), d.getFechaAlta()});
+                modelo.addRow(new Object[] {o.getId(), o.getNombre(), o.getTelefono()});
 
             }
             
@@ -190,7 +186,6 @@ public class MainFrame extends javax.swing.JFrame {
             System.err.println("Ocurrio un error: " + ex.getMessage());
             
         }
-        
     }
     
     /**
@@ -210,20 +205,20 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainOficial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainOficial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainOficial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainOficial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                new MainOficial().setVisible(true);
             }
         });
     }
@@ -235,6 +230,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblConductores;
+    private javax.swing.JTable tblOficiales;
     // End of variables declaration//GEN-END:variables
 }
