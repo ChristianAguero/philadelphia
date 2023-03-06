@@ -13,12 +13,12 @@ import mx.itson.philadelphia.persistencia.ConductorDAO;
  *
  * @author Christian
  */
-public class MainFrame extends javax.swing.JFrame {
+public class MainConductor extends javax.swing.JFrame {
 
     /**
      * Creates new form MainFrame
      */
-    public MainFrame() {
+    public MainConductor() {
         initComponents();
         
         tblConductores.removeColumn(tblConductores.getColumnModel().getColumn(0));
@@ -41,7 +41,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnEditar = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -119,7 +119,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         
-        Guardar formulario = new Guardar(this, true, 0);
+        GuardarConductor formulario = new GuardarConductor(this, true, 0);
        formulario.setVisible(true);
        
        cargarTabla();
@@ -134,7 +134,7 @@ public class MainFrame extends javax.swing.JFrame {
             int renglon = tblConductores.getSelectedRow();
            int idConductor = Integer.parseInt( tblConductores.getModel().getValueAt(renglon, 0).toString());
 
-            new Guardar(this, true, idConductor).setVisible(true);
+            new GuardarConductor(this, true, idConductor).setVisible(true);
 
             cargarTabla();
         
@@ -210,20 +210,21 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainConductor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainConductor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainConductor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainConductor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                new MainConductor().setVisible(true);
             }
         });
     }

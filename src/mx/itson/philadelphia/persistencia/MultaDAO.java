@@ -43,7 +43,7 @@ public class MultaDAO {
         return multas;
     
     }
-    
+    /*
     public boolean guardar(String nombre, String numeroLicencia, Date fechaAlta){
         
         boolean resultado = false;
@@ -163,5 +163,5 @@ public class MultaDAO {
          return resultado;
         
     }
-    
+    */
 }

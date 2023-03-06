@@ -8,46 +8,53 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import mx.itson.philadelphia.entities.Conductor;
-import mx.itson.philadelphia.persistencia.ConductorDAO;
+import mx.itson.philadelphia.entities.Multa;
+import mx.itson.philadelphia.persistencia.MultaDAO;
 
 /**
  *
  * @author Christian
  */
-public class Guardar extends javax.swing.JDialog {
+public class GuardarMulta extends javax.swing.JDialog {
     
-    int idConductor;
+    int idMulta;
 
     /**
-     * Creates new form Guardar
+     * Creates new form GuardarMulta
      */
-    public Guardar(java.awt.Frame parent, boolean modal, int id) {
+    public GuardarMulta(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
         
-        this.idConductor = id;
+        idMulta = id;
         
-        DateFormat formato = new SimpleDateFormat("dd/MMMM/yyyy");
-        
-        if(idConductor != 0){
-            
-            ConductorDAO con = new ConductorDAO();
-            Conductor conductor = con.obtenerPorId(this.idConductor);
-            
-            txtNombre.setText(conductor.getNombre());
-            txtNumeroLicencia.setText(conductor.getNumeroLicencia());
-            Date fecha = conductor.getFechaAlta();
-            String alta = formato.format(fecha);
-            String a[] = alta.split("/");
-            
-        }
+         DateFormat formato = new SimpleDateFormat("dd/MMMM/yyyy");
         
         cboDias.removeAllItems();
         cboAnios.removeAllItems();
+        cboConductor.removeAllItems();
+        cboOficial.removeAllItems();
         
+        agregarOficialesYConductores();
         CambiarDias();
- 
+        
+        if(idMulta != 0){
+            
+            MultaDAO mul = new MultaDAO();
+            Multa multa = mul.obtenerPorId(this.idMulta);
+            
+            txtFolio.setText(multa.getNombre());
+            txtNumeroLicencia.setText(multa.getNumeroLicencia());
+            Date fecha = multa.getFecha();
+            String fech = formato.format(fecha);
+            String f[] = fech.split("/");
+            
+            cboMeses.setSelectedItem(f[1]);
+            cboDias.setSelectedItem(f[0]);
+            cboAnios.setSelectedItem(f[2]);
+            
+        }
+        
     }
 
     /**
@@ -59,24 +66,25 @@ public class Guardar extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenu1 = new javax.swing.JMenu();
         jLabel1 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        txtFolio = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtNumeroLicencia = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cboMeses = new javax.swing.JComboBox<>();
         cboDias = new javax.swing.JComboBox<>();
         cboAnios = new javax.swing.JComboBox<>();
         btnGuardar = new javax.swing.JButton();
-
-        jMenu1.setText("jMenu1");
+        cboConductor = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        cboOficial = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        txtMotivo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Nombre");
+        jLabel1.setText("Folio");
 
-        jLabel2.setText("Numero de licencia");
+        jLabel2.setText("Conductor");
 
         jLabel3.setText("Fecha de alta");
 
@@ -99,28 +107,36 @@ public class Guardar extends javax.swing.JDialog {
             }
         });
 
+        jLabel4.setText("Oficial");
+
+        jLabel5.setText("Motivo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(cboMeses, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cboDias, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cboAnios, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNombre)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNumeroLicencia)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cboMeses, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboDias, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboAnios, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 116, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtFolio)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                    .addComponent(cboConductor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                    .addComponent(cboOficial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtMotivo))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -129,12 +145,20 @@ public class Guardar extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNumeroLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboConductor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cboOficial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -143,47 +167,47 @@ public class Guardar extends javax.swing.JDialog {
                     .addComponent(cboAnios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGuardar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cboMesesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboMesesItemStateChanged
+
+        CambiarDias();
+
+    }//GEN-LAST:event_cboMesesItemStateChanged
+
     private void cboMesesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMesesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboMesesActionPerformed
 
-    private void cboMesesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboMesesItemStateChanged
-        
-        CambiarDias();
-        
-    }//GEN-LAST:event_cboMesesItemStateChanged
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
+
         try{
-            
+
             SimpleDateFormat formato = new SimpleDateFormat("dd/MMMM/yyyy");
 
-            String nombre = txtNombre.getText();
+            String nombre = txtFolio.getText();
             String numeroLicencia = txtNumeroLicencia.getText();
             String fecha = cboDias.getSelectedItem().toString() + "/" + cboMeses.getSelectedItem().toString() + "/" + cboAnios.getSelectedItem().toString();
             Date fechaAlta = formato.parse(fecha);
 
-            boolean funco = this.idConductor == 0 ?
-                    new ConductorDAO().guardar(nombre, numeroLicencia, fechaAlta):
-                    new ConductorDAO().editar(idConductor, nombre, numeroLicencia, fechaAlta);
+            boolean funco = this.idMulta == 0 ?
+            new MultaDAO().guardar(nombre, numeroLicencia, fechaAlta):
+            new MultaDAO().editar(idConductor, nombre, numeroLicencia, fechaAlta);
 
             if(funco){
 
-               JOptionPane.showMessageDialog(this, "El registro fue exitoso", "Guardado", JOptionPane.INFORMATION_MESSAGE);
-               
-               dispose();
+                JOptionPane.showMessageDialog(this, "El registro fue exitoso", "Guardado", JOptionPane.INFORMATION_MESSAGE);
+
+                dispose();
 
             }else{
 
                 JOptionPane.showMessageDialog(this, "El registro tuvo un error", "No guardado", JOptionPane.ERROR_MESSAGE);
-                
+
                 dispose();
 
             }
@@ -193,18 +217,24 @@ public class Guardar extends javax.swing.JDialog {
             System.err.println("Ocurrio un error: " + ex.getMessage());
 
         }
-        
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    public void agregarOficialesYConductores(){
+        
+        
+        
+    }
+    
     public void CambiarDias(){
         
          try{
              
              int dia = 1;
              int i = 0;
-             int a = 1700;
+             int a = 1900;
              
-             while(a <= 3000){
+             while(a <= 2100){
                  
                  cboAnios.addItem(Integer.toString(a));
                  a++;
@@ -359,20 +389,20 @@ public class Guardar extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Guardar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuardarMulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Guardar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuardarMulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Guardar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuardarMulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Guardar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuardarMulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Guardar dialog = new Guardar(new javax.swing.JFrame(), true, 0);
+                GuardarMulta dialog = new GuardarMulta(new javax.swing.JFrame(), true, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -387,13 +417,16 @@ public class Guardar extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> cboAnios;
+    private javax.swing.JComboBox<String> cboConductor;
     private javax.swing.JComboBox<String> cboDias;
     private javax.swing.JComboBox<String> cboMeses;
+    private javax.swing.JComboBox<String> cboOficial;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNumeroLicencia;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtFolio;
+    private javax.swing.JTextField txtMotivo;
     // End of variables declaration//GEN-END:variables
 }
