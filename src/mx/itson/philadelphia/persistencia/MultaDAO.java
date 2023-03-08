@@ -5,9 +5,10 @@
 package mx.itson.philadelphia.persistencia;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
-import mx.itson.philadelphia.entities.Multa;
+import mx.itson.philadelphia.entities.*;
 import mx.itson.philadelphia.utilerias.HibernateUtil;
 import org.hibernate.Session;
 
@@ -43,8 +44,8 @@ public class MultaDAO {
         return multas;
     
     }
-    /*
-    public boolean guardar(String nombre, String numeroLicencia, Date fechaAlta){
+
+    public boolean guardar(String folio, String motivo, Date fecha, Conductor conductor, Oficial Oficial){
         
         boolean resultado = false;
         
@@ -53,16 +54,18 @@ public class MultaDAO {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             
-            Conductor c = new Conductor();
-            c.setNombre(nombre);
-            c.setNumeroLicencia(numeroLicencia);
-            c.setFechaAlta(fechaAlta);
+            Multa m = new Multa();
+            m.setFolio(folio);
+            m.setMotivo(motivo);
+            m.setFecha(fecha);
+            m.setConductor(conductor);
+            m.setOficial(Oficial);
             
-            session.save(c);
+            session.save(m);
             
             session.getTransaction().commit();
             
-            resultado = c.getId() != 0;
+            resultado = m.getId() != 0;
             
         }catch(Exception ex){
             
@@ -74,7 +77,7 @@ public class MultaDAO {
         
     }
     
-    public Conductor obtenerPorId(int id){
+    /*public Conductor obtenerPorId(int id){
         
         Conductor conductor = new Conductor();
         
@@ -91,9 +94,9 @@ public class MultaDAO {
         
         return conductor;
         
-    }
+    }*/
     
-    public boolean editar(int id, String nombre, String numeroLicencia, Date fechaAlta){
+   /* public boolean editar(int id, String nombre, String numeroLicencia, Date fechaAlta){
         
         boolean resultado = false;
         
@@ -125,9 +128,9 @@ public class MultaDAO {
         
         return resultado;
         
-    }
+    }*/
     
-    public boolean eliminar(int id){
+    /*public boolean eliminar(int id){
         
         boolean resultado = false;
         

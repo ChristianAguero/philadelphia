@@ -38,6 +38,11 @@ public class MainMulta extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMultas = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        btnAgregar = new javax.swing.JMenuItem();
+        btnEditar = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -64,6 +69,36 @@ public class MainMulta extends javax.swing.JFrame {
             tblMultas.getColumnModel().getColumn(3).setPreferredWidth(10);
         }
 
+        jMenu1.setText("Opciones");
+
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btnAgregar);
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btnEditar);
+
+        jMenuItem1.setText("Eliminar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,6 +124,53 @@ public class MainMulta extends javax.swing.JFrame {
         cargarTabla();
         
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+
+        GuardarMulta formulario = new GuardarMulta(this, true, 0);
+        formulario.setVisible(true);
+
+        cargarTabla();
+
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+
+        /*try{
+
+            int renglon = tblConductores.getSelectedRow();
+            int idConductor = Integer.parseInt( tblConductores.getModel().getValueAt(renglon, 0).toString());
+
+            new GuardarConductor(this, true, idConductor).setVisible(true);
+
+            cargarTabla();
+
+        }catch(Exception ex){
+
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+
+        }*/
+
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+
+        /*try{
+
+            int renglon = tblConductores.getSelectedRow();
+            int idPais = Integer.parseInt( tblConductores.getModel().getValueAt(renglon, 0).toString());
+
+            new ConductorDAO().eliminar(idPais);
+
+            cargarTabla();
+
+        }catch(Exception ex){
+
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+
+        }/*/
+
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * Sirve para imprimir la tabla de la base de datos a la tabla que vera el usuiario
@@ -152,6 +234,11 @@ public class MainMulta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem btnAgregar;
+    private javax.swing.JMenuItem btnEditar;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblMultas;
     // End of variables declaration//GEN-END:variables

@@ -78,6 +78,13 @@ public class Conductor {
         this.fechaAlta = fechaAlta;
     }
     
+    @Override
+    public String toString(){
+        
+        return this.nombre;
+        
+    }
+    
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;

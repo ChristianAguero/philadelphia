@@ -42,9 +42,9 @@
                   <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtFolio" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabel2" alignment="0" pref="376" max="32767" attributes="0"/>
-                  <Component id="cboConductor" alignment="0" max="32767" attributes="0"/>
+                  <Component id="cboConductores" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabel4" alignment="0" pref="376" max="32767" attributes="0"/>
-                  <Component id="cboOficial" alignment="0" max="32767" attributes="0"/>
+                  <Component id="cboOficiales" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtMotivo" alignment="0" max="32767" attributes="0"/>
               </Group>
@@ -62,11 +62,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="cboConductor" min="-2" max="-2" attributes="0"/>
+              <Component id="cboConductores" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="cboOficial" min="-2" max="-2" attributes="0"/>
+              <Component id="cboOficiales" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -159,14 +159,14 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cboConductor">
+    <Component class="javax.swing.JComboBox" name="cboConductores">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Conductor&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -174,14 +174,14 @@
         <Property name="text" type="java.lang.String" value="Oficial"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cboOficial">
+    <Component class="javax.swing.JComboBox" name="cboOficiales">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Oficial&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">

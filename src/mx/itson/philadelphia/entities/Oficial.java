@@ -58,6 +58,13 @@ public class Oficial {
         this.telefono = telefono;
     }
     
+    @Override
+    public String toString(){
+        
+        return this.nombre;
+        
+    }
+    
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;

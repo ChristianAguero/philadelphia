@@ -7,9 +7,10 @@ package mx.itson.philadelphia.ui;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
-import mx.itson.philadelphia.entities.Multa;
-import mx.itson.philadelphia.persistencia.MultaDAO;
+import mx.itson.philadelphia.entities.*;
+import mx.itson.philadelphia.persistencia.*;
 
 /**
  *
@@ -32,13 +33,13 @@ public class GuardarMulta extends javax.swing.JDialog {
         
         cboDias.removeAllItems();
         cboAnios.removeAllItems();
-        cboConductor.removeAllItems();
-        cboOficial.removeAllItems();
+        cboConductores.removeAllItems();
+        cboOficiales.removeAllItems();
         
         agregarOficialesYConductores();
         CambiarDias();
         
-        if(idMulta != 0){
+        /*if(idMulta != 0){
             
             MultaDAO mul = new MultaDAO();
             Multa multa = mul.obtenerPorId(this.idMulta);
@@ -53,7 +54,7 @@ public class GuardarMulta extends javax.swing.JDialog {
             cboDias.setSelectedItem(f[0]);
             cboAnios.setSelectedItem(f[2]);
             
-        }
+        }*/
         
     }
 
@@ -74,9 +75,9 @@ public class GuardarMulta extends javax.swing.JDialog {
         cboDias = new javax.swing.JComboBox<>();
         cboAnios = new javax.swing.JComboBox<>();
         btnGuardar = new javax.swing.JButton();
-        cboConductor = new javax.swing.JComboBox<>();
+        cboConductores = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        cboOficial = new javax.swing.JComboBox<>();
+        cboOficiales = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         txtMotivo = new javax.swing.JTextField();
 
@@ -132,9 +133,9 @@ public class GuardarMulta extends javax.swing.JDialog {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtFolio)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                    .addComponent(cboConductor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cboConductores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                    .addComponent(cboOficial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cboOficiales, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtMotivo))
                 .addContainerGap())
@@ -149,11 +150,11 @@ public class GuardarMulta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cboConductor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboConductores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cboOficial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboOficiales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -189,14 +190,18 @@ public class GuardarMulta extends javax.swing.JDialog {
 
             SimpleDateFormat formato = new SimpleDateFormat("dd/MMMM/yyyy");
 
-            String nombre = txtFolio.getText();
-            String numeroLicencia = txtNumeroLicencia.getText();
+            String folio = txtFolio.getText();
+            Conductor conductor = (Conductor)cboConductores.getSelectedItem();
+            Oficial oficial = (Oficial)cboOficiales.getSelectedItem();
+            String motivo = txtMotivo.getText();
             String fecha = cboDias.getSelectedItem().toString() + "/" + cboMeses.getSelectedItem().toString() + "/" + cboAnios.getSelectedItem().toString();
-            Date fechaAlta = formato.parse(fecha);
+            Date fechaMulta = formato.parse(fecha);
 
-            boolean funco = this.idMulta == 0 ?
-            new MultaDAO().guardar(nombre, numeroLicencia, fechaAlta):
-            new MultaDAO().editar(idConductor, nombre, numeroLicencia, fechaAlta);
+            //boolean funco = this.idMulta == 0 ?
+            //new MultaDAO().guardar(folio, motivo, fechaMulta, conductor, oficial);
+            //new MultaDAO().editar(idConductor, nombre, numeroLicencia, fechaAlta);
+            
+            boolean funco = new MultaDAO().guardar(folio, motivo, fechaMulta, conductor, oficial);
 
             if(funco){
 
@@ -222,7 +227,30 @@ public class GuardarMulta extends javax.swing.JDialog {
 
     public void agregarOficialesYConductores(){
         
+        ConductorDAO cn = new ConductorDAO();
+        List<Conductor> conductores = cn.ObtenerTodos();
+        OficialDAO of = new OficialDAO();
+        List<Oficial> oficiales = of.ObtenerTodos();
         
+        try{
+            
+            for(Conductor c : conductores){
+            
+                cboConductores.addItem(c);
+            
+            }
+            
+            for(Oficial o : oficiales){
+            
+                cboOficiales.addItem(o);
+            
+            }
+            
+        }catch(Exception ex){
+            
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+            
+        }
         
     }
     
@@ -417,10 +445,10 @@ public class GuardarMulta extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> cboAnios;
-    private javax.swing.JComboBox<String> cboConductor;
+    private javax.swing.JComboBox<Conductor> cboConductores;
     private javax.swing.JComboBox<String> cboDias;
     private javax.swing.JComboBox<String> cboMeses;
-    private javax.swing.JComboBox<String> cboOficial;
+    private javax.swing.JComboBox<Oficial> cboOficiales;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
