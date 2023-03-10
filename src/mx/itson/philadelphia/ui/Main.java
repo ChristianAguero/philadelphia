@@ -4,6 +4,11 @@
  */
 package mx.itson.philadelphia.ui;
 
+import java.awt.Frame;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import mx.itson.philadelphia.persistencia.*;
+
 /**
  *
  * @author Christian
@@ -31,6 +36,11 @@ public class Main extends javax.swing.JFrame {
         btnMultas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         btnConductores.setText("Conductores");
         btnConductores.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +110,24 @@ public class Main extends javax.swing.JFrame {
         m.setVisible(true);
         
     }//GEN-LAST:event_btnMultasActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+        Frame f=new JFrame(); 
+        
+        JOptionPane.showMessageDialog(f, "Please wait until the database load", "Wait please", JOptionPane.WARNING_MESSAGE);
+        
+        MultaDAO ml = new MultaDAO();
+        ConductorDAO cn = new ConductorDAO();
+        OficialDAO of = new OficialDAO();
+        
+        ml.ObtenerTodos();
+        cn.ObtenerTodos();
+        of.ObtenerTodos();
+        
+       JOptionPane.showMessageDialog(f, "Base de datos cargada satisfactoriamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+        
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
