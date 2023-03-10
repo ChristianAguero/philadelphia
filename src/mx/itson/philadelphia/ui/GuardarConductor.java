@@ -159,6 +159,8 @@ public class GuardarConductor extends javax.swing.JDialog {
 
     private void cboMesesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboMesesItemStateChanged
         
+        cboDias.removeAllItems();
+        cboAnios.removeAllItems();
         CambiarDias();
         
     }//GEN-LAST:event_cboMesesItemStateChanged
@@ -217,7 +219,7 @@ public class GuardarConductor extends javax.swing.JDialog {
             
              if(cboMeses.getSelectedItem().toString().equals("January")){
                  
-                 while(i <= 31){
+                 while(i < 31){
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
@@ -227,7 +229,7 @@ public class GuardarConductor extends javax.swing.JDialog {
                  
              }else if(cboMeses.getSelectedItem().toString().equals("February")){
                  
-                 while(i <= 29){
+                 while(i < 29){
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
@@ -237,7 +239,7 @@ public class GuardarConductor extends javax.swing.JDialog {
                  
              }else if(cboMeses.getSelectedItem().toString().equals("March")){
                  
-                 while(i <= 31){
+                 while(i < 31){
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
@@ -247,7 +249,7 @@ public class GuardarConductor extends javax.swing.JDialog {
                  
              }else if(cboMeses.getSelectedItem().toString().equals("April")){
                  
-                 while(i <= 30){
+                 while(i < 30){
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
@@ -257,7 +259,7 @@ public class GuardarConductor extends javax.swing.JDialog {
                  
              }else if(cboMeses.getSelectedItem().toString().equals("May")){
                  
-                 while(i <= 31){
+                 while(i < 31){
                      
                     cboDias.addItem(Integer.toString(dia));
                      i++;
@@ -267,7 +269,7 @@ public class GuardarConductor extends javax.swing.JDialog {
                  
              }else if(cboMeses.getSelectedItem().toString().equals("June")){
                  
-                 while(i <= 30){
+                 while(i < 30){
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
@@ -277,7 +279,7 @@ public class GuardarConductor extends javax.swing.JDialog {
                  
              }else if(cboMeses.getSelectedItem().toString().equals("July")){
                  
-                 while(i <= 31){
+                 while(i < 31){
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
@@ -287,7 +289,7 @@ public class GuardarConductor extends javax.swing.JDialog {
                  
              }else if(cboMeses.getSelectedItem().toString().equals("August")){
                  
-                 while(i <= 31){
+                 while(i < 31){
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
@@ -297,7 +299,7 @@ public class GuardarConductor extends javax.swing.JDialog {
                  
              }else if(cboMeses.getSelectedItem().toString().equals("September")){
                  
-                 while(i <= 30){
+                 while(i < 30){
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
@@ -307,7 +309,7 @@ public class GuardarConductor extends javax.swing.JDialog {
                  
              }else if(cboMeses.getSelectedItem().toString().equals("October")){
                  
-                 while(i <= 31){
+                 while(i < 31){
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
@@ -317,7 +319,7 @@ public class GuardarConductor extends javax.swing.JDialog {
                  
              }else if(cboMeses.getSelectedItem().toString().equals("November")){
                  
-                 while(i <= 30){
+                 while(i < 30){
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
@@ -327,7 +329,7 @@ public class GuardarConductor extends javax.swing.JDialog {
                  
              }else if(cboMeses.getSelectedItem().toString().equals("December")){
                  
-                 while(i <= 31){
+                 while(i < 31){
                      
                      cboDias.addItem(Integer.toString(dia));
                      i++;
