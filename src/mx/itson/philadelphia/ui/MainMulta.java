@@ -136,12 +136,12 @@ public class MainMulta extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
-        /*try{
+        try{
 
-            int renglon = tblConductores.getSelectedRow();
-            int idConductor = Integer.parseInt( tblConductores.getModel().getValueAt(renglon, 0).toString());
+            int renglon = tblMultas.getSelectedRow();
+            int id = Integer.parseInt( tblMultas.getModel().getValueAt(renglon, 0).toString());
 
-            new GuardarConductor(this, true, idConductor).setVisible(true);
+            new GuardarMulta(this, true, id).setVisible(true);
 
             cargarTabla();
 
@@ -149,18 +149,18 @@ public class MainMulta extends javax.swing.JFrame {
 
             System.err.println("Ocurrio un error: " + ex.getMessage());
 
-        }*/
+        }
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
 
-        /*try{
+        try{
 
-            int renglon = tblConductores.getSelectedRow();
-            int idPais = Integer.parseInt( tblConductores.getModel().getValueAt(renglon, 0).toString());
+            int renglon = tblMultas.getSelectedRow();
+            int id = Integer.parseInt( tblMultas.getModel().getValueAt(renglon, 0).toString());
 
-            new ConductorDAO().eliminar(idPais);
+            new MultaDAO().eliminar(id);
 
             cargarTabla();
 
@@ -168,7 +168,7 @@ public class MainMulta extends javax.swing.JFrame {
 
             System.err.println("Ocurrio un error: " + ex.getMessage());
 
-        }/*/
+        }
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 

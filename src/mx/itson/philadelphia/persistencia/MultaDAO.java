@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.swing.JOptionPane;
 import mx.itson.philadelphia.entities.*;
 import mx.itson.philadelphia.utilerias.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
@@ -77,14 +79,14 @@ public class MultaDAO {
         
     }
     
-    /*public Conductor obtenerPorId(int id){
+    public Multa obtenerPorId(int id){
         
-        Conductor conductor = new Conductor();
+        Multa multa = new Multa();
         
         try{
             
             Session session = HibernateUtil.getSessionFactory().openSession();
-            conductor = session.get(Conductor.class,  id);
+            multa = session.get(Multa.class,  id);
             
         }catch(HibernateException ex){
             
@@ -92,11 +94,11 @@ public class MultaDAO {
             
         }
         
-        return conductor;
+        return multa;
         
-    }*/
+    }
     
-   /* public boolean editar(int id, String nombre, String numeroLicencia, Date fechaAlta){
+    public boolean editar(int id, String folio, String motivo, Date fechaMulta, Conductor conductor, Oficial oficial){
         
         boolean resultado = false;
         
@@ -105,15 +107,17 @@ public class MultaDAO {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             
-            Conductor conductor = obtenerPorId(id);
+            Multa multa = obtenerPorId(id);
             
             if(conductor != null){
                 
-                conductor.setNombre(nombre);
-                conductor.setFechaAlta(fechaAlta);
-                conductor.setNumeroLicencia(numeroLicencia);
+                multa.setConductor(conductor);
+                multa.setFecha(fechaMulta);
+                multa.setFolio(folio);
+                multa.setMotivo(motivo);
+                multa.setOficial(oficial);
                 
-                session.saveOrUpdate(conductor);
+                session.saveOrUpdate(multa);
                 session.getTransaction().commit();
                 
                 resultado = true;
@@ -128,9 +132,9 @@ public class MultaDAO {
         
         return resultado;
         
-    }*/
+    }
     
-    /*public boolean eliminar(int id){
+    public boolean eliminar(int id){
         
         boolean resultado = false;
         
@@ -144,11 +148,11 @@ public class MultaDAO {
                Session session = HibernateUtil.getSessionFactory().openSession();
                session.beginTransaction();
 
-               Conductor conductor = obtenerPorId(id);
+               Multa multa = obtenerPorId(id);
 
-               if(conductor != null){
+               if(multa != null){
 
-                   session.delete(conductor);
+                   session.delete(multa);
                    session.getTransaction().commit();
 
                    resultado = true;
@@ -166,5 +170,5 @@ public class MultaDAO {
          return resultado;
         
     }
-    */
+    
 }

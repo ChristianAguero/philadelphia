@@ -39,13 +39,15 @@ public class GuardarMulta extends javax.swing.JDialog {
         agregarOficialesYConductores();
         CambiarDias();
         
-        /*if(idMulta != 0){
+        if(idMulta != 0){
             
             MultaDAO mul = new MultaDAO();
             Multa multa = mul.obtenerPorId(this.idMulta);
             
-            txtFolio.setText(multa.getNombre());
-            txtNumeroLicencia.setText(multa.getNumeroLicencia());
+            txtFolio.setText(multa.getFolio());
+            cboConductores.setSelectedItem(multa.getConductor());
+            cboOficiales.setSelectedItem(multa.getOficial());
+            txtMotivo.setText(multa.getMotivo());
             Date fecha = multa.getFecha();
             String fech = formato.format(fecha);
             String f[] = fech.split("/");
@@ -54,7 +56,7 @@ public class GuardarMulta extends javax.swing.JDialog {
             cboDias.setSelectedItem(f[0]);
             cboAnios.setSelectedItem(f[2]);
             
-        }*/
+        }
         
     }
 
@@ -197,11 +199,9 @@ public class GuardarMulta extends javax.swing.JDialog {
             String fecha = cboDias.getSelectedItem().toString() + "/" + cboMeses.getSelectedItem().toString() + "/" + cboAnios.getSelectedItem().toString();
             Date fechaMulta = formato.parse(fecha);
 
-            //boolean funco = this.idMulta == 0 ?
-            //new MultaDAO().guardar(folio, motivo, fechaMulta, conductor, oficial);
-            //new MultaDAO().editar(idConductor, nombre, numeroLicencia, fechaAlta);
-            
-            boolean funco = new MultaDAO().guardar(folio, motivo, fechaMulta, conductor, oficial);
+            boolean funco = this.idMulta == 0 ?
+            new MultaDAO().guardar(folio, motivo, fechaMulta, conductor, oficial):
+            new MultaDAO().editar(idMulta, folio, motivo, fechaMulta, conductor, oficial);
 
             if(funco){
 
