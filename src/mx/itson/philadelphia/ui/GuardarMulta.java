@@ -41,12 +41,51 @@ public class GuardarMulta extends javax.swing.JDialog {
         
         if(idMulta != 0){
             
+            int i = 0;
+            int j = 0;
             MultaDAO mul = new MultaDAO();
             Multa multa = mul.obtenerPorId(this.idMulta);
+            ConductorDAO cn = new ConductorDAO();
+            List<Conductor> conductores = cn.ObtenerTodos();
+            OficialDAO of = new OficialDAO();
+            List<Oficial> oficiales = of.ObtenerTodos();
+            
+            for(Conductor conductor : conductores){
+                
+                int idTemp = conductor.getId();
+                
+                if (idTemp == multa.getConductor().getId()){
+
+                    break;
+
+                }else {
+                    
+                    i++;
+                    
+                }
+                
+            }
+            
+            for(Oficial oficial : oficiales){
+                
+                int idTemp = oficial.getId();
+                
+                if (idTemp == multa.getOficial().getId()){
+
+                    break;
+
+                }else {
+                    
+                    j++;
+                    
+                }
+                
+            }
             
             txtFolio.setText(multa.getFolio());
-            cboConductores.setSelectedItem(multa.getConductor());
-            cboOficiales.setSelectedItem(multa.getOficial());
+
+            cboConductores.setSelectedIndex(i);
+            cboOficiales.setSelectedIndex(j);
             txtMotivo.setText(multa.getMotivo());
             Date fecha = multa.getFecha();
             String fech = formato.format(fecha);

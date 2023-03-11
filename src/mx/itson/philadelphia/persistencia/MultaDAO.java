@@ -109,7 +109,7 @@ public class MultaDAO {
             
             Multa multa = obtenerPorId(id);
             
-            if(conductor != null){
+            if(multa != null){
                 
                 multa.setConductor(conductor);
                 multa.setFecha(fechaMulta);
