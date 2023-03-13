@@ -111,7 +111,6 @@ public class Multa {
     private int id;
     private String folio;
     private String motivo;
-    
     @Temporal(TemporalType.DATE)
     private Date fecha;
     @OneToOne(cascade = CascadeType.MERGE)
